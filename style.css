@@ -13,12 +13,13 @@ body {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    width: 350px;
     text-align: center;
 }
 
 h1 {
     font-size: 24px;
+    margin-bottom: 10px;
 }
 
 ul {
@@ -27,11 +28,11 @@ ul {
 }
 
 li {
-    margin: 5px 0;
+    margin: 4px 0;
 }
 
 #book-ticket {
-    background-color: #4CAF50;
+    background-color: #28a745;
     color: white;
     padding: 10px 20px;
     border: none;
@@ -42,9 +43,16 @@ li {
 
 #book-ticket:disabled {
     background-color: #ccc;
+    cursor: not-allowed;
 }
 
 #confirmation {
+    margin-top: 10px;
     color: green;
-    font-weight: bold;
+    font-weight: bold;
+}
+
+#no-seats {
+    margin-top: 10px;
+    font-weight: bold;
 }
