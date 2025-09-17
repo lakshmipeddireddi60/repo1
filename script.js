@@ -1,21 +1,25 @@
-let availableSeats = 10;  // Initial number of available seats
+let totalSeats = 30;
+let bookedSeats = 0;
 
-// Update the UI with the current available seats
-function updateSeats() {
-    document.getElementById('available-seats').innerText = availableSeats;
-}
-
-// Book a ticket and update the status
-function bookTicket() {
-    if (availableSeats > 0) {
-        availableSeats--;
-        updateSeats();
-        document.getElementById('confirmation').style.display = 'block';
-        document.getElementById('book-ticket').disabled = true;  // Disable button once ticket is booked
-    } else {
-        alert("Sorry, no available seats left!");
+function updateSeatsDisplay() {
+    const remainingSeats = totalSeats - bookedSeats;
+    document.getElementById("available-seats").innerText = remainingSeats;
+    
+    if (remainingSeats === 0) {
+        document.getElementById("book-ticket").disabled = true;
+        document.getElementById("no-seats").style.display = "block";
     }
 }
 
-// Initially update seats display
-updateSeats();
+function bookTicket() {
+    if (bookedSeats < totalSeats) {
+        bookedSeats++;
+        updateSeatsDisplay();
+        document.getElementById("confirmation").style.display = "block";
+
+        // Hide confirmation message after 2 seconds
+        setTimeout(() => {
+            document.getElementById("confirmation").style.display = "none";
+        }, 2000);
+    }
+}
