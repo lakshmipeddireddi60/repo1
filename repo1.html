@@ -1,23 +1,89 @@
 <!DOCTYPE html>
-<html>
-  <body style="text-align:center;font-family:sans-serif;padding:50px;">
-    <h2>🚌 Bus Ticket Machine</h2>
-    <p id="count">Tickets Booked: 0 / 60</p>
-    <button onclick="book()">Book Ticket</button>
-    <p id="msg" style="color:red;"></p>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🚌 Bus Ticket Booking Machine</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      background: #f7f7f7;
+    }
+    h2 {
+      color: #333;
+    }
+    #count {
+      font-size: 20px;
+      margin: 20px 0;
+    }
+    input {
+      width: 60px;
+      padding: 5px;
+      font-size: 16px;
+      text-align: center;
+    }
+    button {
+      padding: 10px 20px;
+      margin-top: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      background: #007bff;
+      color: white;
+    }
+    button:disabled {
+      background: gray;
+      cursor: not-allowed;
+    }
+    #msg {
+      margin-top: 15px;
+      font-weight: bold;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h2>🚌 Bus Ticket Booking Machine</h2>
+  <p id="count">Seats Available: 60</p>
 
-    <script>
-      let count = 0;
-      function book() {
-        if (count < 60) {
-          count++;
-          document.getElementById("count").innerText = `Tickets Booked: ${count} / 60`;
-        }
-        if (count === 60) {
-          document.querySelector("button").disabled = true;
-          document.getElementById("msg").innerText = "❌ Ticket limit reached.";
-        }
+  <label for="tickets">Enter tickets (max 6): </label>
+  <input type="number" id="tickets" min="1" max="6" value="1">
+  <br>
+  <button onclick="book()">Book Ticket(s)</button>
+
+  <p id="msg"></p>
+
+  <script>
+    let seats = 60;
+
+    function book() {
+      const input = document.getElementById("tickets");
+      const toBook = parseInt(input.value);
+
+      if (isNaN(toBook) || toBook < 1) {
+        document.getElementById("msg").innerText = "⚠️ Please enter a valid number of tickets.";
+        return;
       }
-    </script>
-  </body>
+
+      if (toBook > 6) {
+        document.getElementById("msg").innerText = "⚠️ You cannot book more than 6 tickets at once.";
+        return;
+      }
+
+      if (seats - toBook >= 0) {
+        seats -= toBook;
+        document.getElementById("count").innerText = `Seats Available: ${seats}`;
+        document.getElementById("msg").innerText = "✅ Booking successful!";
+      } else {
+        seats = 0;
+        document.getElementById("count").innerText = `Seats Available: 0`;
+        document.getElementById("msg").innerText = "❌ Seats filled!";
+        document.querySelector("button").disabled = true;
+      }
+    }
+  </script>
+</body>
 </html>
