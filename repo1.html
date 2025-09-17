@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <body style="text-align:center;font-family:sans-serif;padding:50px;">
+    <h2>🚌 Bus Ticket Machine</h2>
+    <p id="count">Tickets Booked: 0 / 60</p>
+    <button onclick="book()">Book Ticket</button>
+    <p id="msg" style="color:red;"></p>
+
+    <script>
+      let count = 0;
+      function book() {
+        if (count < 60) {
+          count++;
+          document.getElementById("count").innerText = Tickets Booked: ${count} / 60;
+        }
+        if (count === 60) {
+          document.querySelector("button").disabled = true;
+          document.getElementById("msg").innerText = "❌ Ticket limit reached.";
+        }
+      }
+    </script>
+  </body>
+</html>
