@@ -1,89 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🚌 Bus Ticket Booking Machine</title>
-  <style>
-    body {
-      text-align: center;
-      font-family: Arial, sans-serif;
-      padding: 40px;
-      background: #f7f7f7;
-    }
-    h2 {
-      color: #333;
-    }
-    #count {
-      font-size: 20px;
-      margin: 20px 0;
-    }
-    input {
-      width: 60px;
-      padding: 5px;
-      font-size: 16px;
-      text-align: center;
-    }
-    button {
-      padding: 10px 20px;
-      margin-top: 10px;
-      font-size: 16px;
-      cursor: pointer;
-      border: none;
-      border-radius: 8px;
-      background: #007bff;
-      color: white;
-    }
-    button:disabled {
-      background: gray;
-      cursor: not-allowed;
-    }
-    #msg {
-      margin-top: 15px;
-      font-weight: bold;
-      color: red;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Ticket Booking</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h2>🚌 Bus Ticket Booking Machine</h2>
-  <p id="count">Seats Available: 60</p>
+    <div class="container">
+        <h1>Bus Ticket Booking</h1>
+        <div id="bus-details">
+            <p>Bus Route: <strong>Route A - City Center to Park</strong></p>
+            <p>Number of Stops: <strong>5</strong></p>
+            <ul id="stops-list">
+                <li>City Center</li>
+                <li>Main Square</li>
+                <li>Park Avenue</li>
+                <li>River Bridge</li>
+                <li>Park</li>
+            </ul>
+            <p>Available Seats: <span id="available-seats">10</span> seats left</p>
+            <button id="book-ticket" onclick="bookTicket()">Book a Ticket</button>
+            <div id="confirmation" style="display:none;">
+                <p>Ticket Booked Successfully! Enjoy your ride!</p>
+            </div>
+        </div>
+    </div>
 
-  <label for="tickets">Enter tickets (max 6): </label>
-  <input type="number" id="tickets" min="1" max="6" value="1">
-  <br>
-  <button onclick="book()">Book Ticket(s)</button>
-
-  <p id="msg"></p>
-
-  <script>
-    let seats = 60;
-
-    function book() {
-      const input = document.getElementById("tickets");
-      const toBook = parseInt(input.value);
-
-      if (isNaN(toBook) || toBook < 1) {
-        document.getElementById("msg").innerText = "⚠️ Please enter a valid number of tickets.";
-        return;
-      }
-
-      if (toBook > 6) {
-        document.getElementById("msg").innerText = "⚠️ You cannot book more than 6 tickets at once.";
-        return;
-      }
-
-      if (seats - toBook >= 0) {
-        seats -= toBook;
-        document.getElementById("count").innerText = `Seats Available: ${seats}`;
-        document.getElementById("msg").innerText = "✅ Booking successful!";
-      } else {
-        seats = 0;
-        document.getElementById("count").innerText = `Seats Available: 0`;
-        document.getElementById("msg").innerText = "❌ Seats filled!";
-        document.querySelector("button").disabled = true;
-      }
-    }
-  </script>
+    <script src="script.js"></script>
 </body>
 </html>
